@@ -12,10 +12,11 @@ def run_game():
 	pygame.display.set_caption("Monster Attack") #set msg on status bar
 	hero = Hero(screen) #set variable equal to the class and pass it to the screen
 
-while 1: #1 is true, run this loop forever...
-	gf.check_events(hero)
-	#fill the background(bg) with our green
-	gf.update_screen(game_settings, screen, hero) #call method to update screen
+	while 1: #1 is true, run this loop forever...
+		gf.check_events(hero)
+		hero.update() #update the hero flags
+		#fill the background(bg) with our green
+		gf.update_screen(game_settings, screen, hero) #call method to update screen
 	
 
 
