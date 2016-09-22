@@ -10,5 +10,11 @@ class Hero(object):
 		self.rect.centerx = self.screen_rect.centerx #this will put the middle of the hero at the middle of the screen #sety
 		self.rect.bottom = self.screen_rect.bottom #setx
 
+		#Set up movement booleans
+		self.moving_right = False
+		self.moving_left = False
+		self.moving_up = False
+		self.moving_down = False
+
 	def draw_me(self):
 		self.screen.blit(self.image, self.rect) #draw the Surface: (the image/source, the where/dest)
