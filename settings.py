@@ -11,4 +11,4 @@ class Settings():
 		self.alien_speed = 2
 		self.mans_left = 3
 		self.game_active = False #init game as not active
-
+		self.score = 0

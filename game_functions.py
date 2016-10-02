@@ -3,10 +3,12 @@ import sys
 import pygame
 from bullets import Bullet
 from aliens import Alien
+from score_board import Score_board
+from settings import Settings
 
 
 
-def check_events(hero, bullets, game_settings, screen, aliens, play_button):
+def check_events(hero, bullets, game_settings, screen, aliens, play_button, score_board):
 	for event in pygame.event.get(): #run through all pygame events
 		if event.type == pygame.QUIT:
 			sys.exit() #quit
@@ -45,18 +47,23 @@ def check_events(hero, bullets, game_settings, screen, aliens, play_button):
 
 
 #Handle all the screen updates and drawing
-def update_screen(settings, screen, hero, bullets, aliens, play_button):
+def update_screen(settings, screen, hero, bullets, aliens, play_button, score_board):
 
 	
-
+	
 	screen.fill(settings.bg_color) #fill screen with bg_color
+	score_board.draw_scoreboard(settings)
+	score_board.update(settings)
 	hero.draw_me() #call the draw method and put the hero on the screen
 	for alien in aliens.sprites():
 		alien.draw_alien()
 	# if len(bullet) < 20: #bullet limit
 	for bullet in bullets.sprites():
 		bullet.draw_bullet()
+	#score_board_button.draw_scoreboard
 
 	if not settings.game_active: #game_settings
 		play_button.draw_button()
+		
+		
 	pygame.display.flip()

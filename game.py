@@ -5,6 +5,7 @@ from settings import Settings
 import game_functions as gf #aliased with 'gf' 
 from pygame.sprite import Group, groupcollide
 from start_button import Play_button
+from score_board import Score_board
 import threading
 
 #Set up the main core function
@@ -20,6 +21,7 @@ def run_game():
 	pygame.mixer.music.play(-1)
 
 	play_button = Play_button(screen, "PLAY")
+	score_board = Score_board(screen, "Score = ")
 	bullets = Group() #set the bullets to group
 	aliens = Group()
 
@@ -62,8 +64,8 @@ def run_game():
 	
 	
 	while 1: #1 is true, run this loop forever...
-		gf.check_events(hero, bullets, game_settings, screen, aliens, play_button)
-		gf.update_screen(game_settings, screen, hero, bullets, aliens, play_button) #call method to update screen
+		gf.check_events(hero, bullets, game_settings, screen, aliens, play_button, score_board)
+		gf.update_screen(game_settings, screen, hero, bullets, aliens, play_button, score_board) #call method to update screen
 
 		if game_settings.game_active:
 			hero.update() #update the hero flags
@@ -74,12 +76,14 @@ def run_game():
 				aliens.add(Alien(screen, game_settings))
 			theDict = groupcollide(aliens, bullets, True, True)
 			# print theDict
+			
 			if (theDict): # if theDict not empty
-				print ("Hit")
+				game_settings.score = len(theDict)
+			
 
 
 			#fill the background(bg) with our color
-			gf.update_screen(game_settings, screen, hero, bullets, aliens, play_button) #call method to update screen
+			gf.update_screen(game_settings, screen, hero, bullets, aliens, play_button, score_board) #call method to update screen
 			#get rid of bullets that are off the screen
 			for bullet in bullets:
 				if bullet.rect.bottom <= 0: #bullet bottom is at the top of the screen
